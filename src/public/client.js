@@ -4,7 +4,6 @@ let store = {
     rovers: ['Curiosity', 'Opportunity', 'Spirit'],
 }
 
-// add our markup to the page
 const root = document.getElementById('root')
 
 const updateStore = (store, newState) => {
@@ -43,16 +42,12 @@ const App = (state) => {
     `
 }
 
-// listening for load event because page should load before any JS is called
 window.addEventListener('load', () => {
     render(root, store)
 })
 
-// ------------------------------------------------------  COMPONENTS
-
-// Pure function that renders conditional information -- THIS IS JUST AN EXAMPLE, you can delete it.
 const Greeting = (name) => {
-    if (name) {
+    if (name) { 
         return `
             <h1>Welcome, ${name}!</h1>
         `
