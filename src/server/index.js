@@ -2,6 +2,7 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const fetch = require('node-fetch')
 const path = require('path')
+const { extractRovers } = require('./adapters')
 
 const app = express()
 const port = 3000
@@ -11,11 +12,12 @@ app.use(bodyParser.json())
 
 app.use('/', express.static(path.join(__dirname, '../public')))
 
-app.get('/apod', async (req, res) => {
+
+app.get('/rovers', async (req, res) => {
     try {
-        let image = await fetch(`https://api.nasa.gov/planetary/apod?api_key=${process.env.NASA_API_KEY}`)
-            .then(res => res.json())
-        res.send({ image })
+        let rovers = await fetch(`https://api.nasa.gov/planetary/apod?api_key=${process.env.NASA_API_KEY}`)
+            .then(res => extractRovers(res.json()))
+        res.send({ rovers })
     } catch (err) {
         console.log('error:', err);
     }
