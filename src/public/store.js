@@ -1,5 +1,4 @@
-/* eslint-disable no-undef */
-/* eslint-disable no-param-reassign */
+import Immutable from 'immutable';
 
 const store = (callback) => {
   let state = Immutable.Map();
@@ -14,7 +13,7 @@ const store = (callback) => {
 
     callback(state.toJS());
 
-    return state;
+    return state.toJS();
   };
 };
 
