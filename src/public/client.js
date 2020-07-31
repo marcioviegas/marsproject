@@ -5,7 +5,6 @@ import getRovers from './api.js';
 const render = (state) => {
   const root = document.getElementById('root');
   root.innerHTML = app(state);
-  console.log(state);
 };
 
 const updateStore = store(render, Immutable);

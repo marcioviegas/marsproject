@@ -35,6 +35,15 @@ test('build menu with corresponding class', () => {
   expect(rovers).toHaveLength(3);
 });
 
+test('build default section when no rover is select', () => {
+  const appDOM = new JSDOM(app(state)).window.document;
+
+  const sections = appDOM.querySelectorAll('section');
+
+  expect(sections).toHaveLength(2);
+  expect(sections[1].innerHTML).toContain('Please select a Rover');
+});
+
 test('build rovers menu link', () => {
   const appDOM = new JSDOM(app(state)).window.document;
 
@@ -52,4 +61,20 @@ test('build rovers menu link', () => {
 
   expect(oportunity).toBeDefined();
   expect(oportunity.innerHTML).toBe('Opportunity');
+});
+
+test('build rover section', () => {
+  const stateActived = {
+    ...state,
+    active: 'Curiosity',
+  };
+
+  const appDOM = new JSDOM(app(stateActived)).window.document;
+  const roverSectionHTML = appDOM.querySelectorAll('section')[1].innerHTML;
+
+  expect(roverSectionHTML).toContain('Name: Curiosity');
+  expect(roverSectionHTML).toContain('Landing Date: 2012-08-06');
+  expect(roverSectionHTML).toContain('Launch Date: 2011-11-26');
+  expect(roverSectionHTML).toContain('Status: active');
+  expect(roverSectionHTML).toContain('Max Date: 2020-07-28');
 });
