@@ -2,8 +2,8 @@ import extractRoversBasicInformation from '../src/server/adapters';
 import roversResponse from './rovers-response.json';
 
 test('extractRoversInformation', () => {
-  expect(extractRoversBasicInformation(roversResponse)).toStrictEqual({
-    rovers: [
+  expect(extractRoversBasicInformation(roversResponse.rovers)).toStrictEqual(
+    [
       {
         name: 'Curiosity',
         landing_date: '2012-08-06',
@@ -26,5 +26,5 @@ test('extractRoversInformation', () => {
         max_date: '2018-06-11',
       },
     ],
-  });
+  );
 });
