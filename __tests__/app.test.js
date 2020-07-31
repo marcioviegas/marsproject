@@ -1,3 +1,4 @@
+import { JSDOM } from 'jsdom';
 import app from '../src/public/app';
 
 const state = {
@@ -26,7 +27,29 @@ const state = {
   ],
 };
 
-test('build app', () => {
-  const appRendered = app(state);
-  expect(appRendered).toBe('<ul id=\'menu\'><li><a href=\'#\' id=\'Curiosity\'>Curiosity</a></li><li><a href=\'#\' id=\'Spirit\'>Spirit</a></li><li><a href=\'#\' id=\'Opportunity\'>Opportunity</a></li></ul>');
+test('build menu with corresponding class', () => {
+  const appDOM = new JSDOM(app(state)).window.document;
+
+  const rovers = appDOM.querySelectorAll('.rover');
+
+  expect(rovers).toHaveLength(3);
+});
+
+test('build rovers menu link', () => {
+  const appDOM = new JSDOM(app(state)).window.document;
+
+  const curiosity = appDOM.querySelector('#Curiosity');
+
+  expect(curiosity).toBeDefined();
+  expect(curiosity.innerHTML).toBe('Curiosity');
+
+  const spirit = appDOM.querySelector('#Spirit');
+
+  expect(spirit).toBeDefined();
+  expect(spirit.innerHTML).toBe('Spirit');
+
+  const oportunity = appDOM.querySelector('#Opportunity');
+
+  expect(oportunity).toBeDefined();
+  expect(oportunity.innerHTML).toBe('Opportunity');
 });

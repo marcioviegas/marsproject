@@ -1,4 +1,4 @@
-const buildMenuItem = (rover) => `<li><a href='#' id='${rover.name}'>${rover.name}</a></li>`;
+const buildMenuItem = (rover) => `<li><a href='#' class='rover' id='${rover.name}'>${rover.name}</a></li>`;
 
 const wrapperMenu = (menuItemList) => `<ul id='menu'>${menuItemList.join('')}</ul>`;
 

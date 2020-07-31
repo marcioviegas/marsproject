@@ -11,6 +11,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 app.use('/', express.static(path.join(path.resolve(), 'src/public')));
+app.use('/immutable', express.static(path.join(path.resolve(), 'node_modules/immutable/dist/immutable.min.js')));
 
 const fetchAsync = async (url) => (await fetch(url)).json();
 
