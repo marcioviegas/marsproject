@@ -1,8 +1,6 @@
 import { extractRovers } from '../src/server/adapters';
-import roversJson from './rovers.json';
+import roversResponse from './rovers-response.json';
 
 test('extractRoversInformation', () => {
-    
-    expect(extractRovers(roversJson)).toBe(roversJson);
-
+  expect(extractRovers(roversResponse)).toBe({ roversResponse });
 });

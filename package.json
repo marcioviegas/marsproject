@@ -2,6 +2,7 @@
   "name": "jsnd3_mars_dashboard",
   "version": "1.0.0",
   "type": "module",
+  "module": "jest",
   "description": "course project",
   "main": "index.js",
   "scripts": {
@@ -25,6 +26,9 @@
   "devDependencies": {
     "@babel/preset-env": "^7.11.0",
     "babel-jest": "^26.2.1",
+    "eslint": "^7.5.0",
+    "eslint-config-airbnb-base": "^14.2.0",
+    "eslint-plugin-import": "^2.22.0",
     "jest": "^26.2.1",
     "nodemon": "^2.0.4"
   }
