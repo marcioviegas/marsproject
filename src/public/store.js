@@ -5,8 +5,8 @@ const store = (callback) => {
 
   return (action) => {
     switch (action.type) {
-      case ('UPDATE_ROVERS'):
-        state = state.set('rovers', Immutable.List(action.data));
+      case ('ADD_ROVERS'):
+        state = state.set('rovers', Immutable.List(action.data.map((r) => Immutable.Map(r))));
         break;
       default: break;
     }

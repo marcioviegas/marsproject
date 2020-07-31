@@ -14,7 +14,7 @@ test('should not change the state if action not mapped - but should return diffe
 
 test('should add rovers on UPDATE and call callback', () => {
   const rover = { name: 'Copertino' };
-  const newState = updateStore({ type: 'UPDATE_ROVERS', data: [rover] });
+  const newState = updateStore({ type: 'ADD_ROVERS', data: [rover] });
   expect(newState.rovers).toHaveLength(1);
   expect(newState.rovers[0]).toStrictEqual(rover);
   expect(mockCallback).toHaveBeenCalledWith(newState);

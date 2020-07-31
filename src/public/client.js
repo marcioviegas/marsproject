@@ -17,7 +17,7 @@ const menuListener = (event) => {
 (() => {
   window.addEventListener('load', () => {
     getRovers().then((responseData) => {
-      updateStore({ type: 'UPDATE_ROVERS', data: responseData.rovers });
+      updateStore({ type: 'ADD_ROVERS', data: responseData.rovers });
     });
   });
 
