@@ -1,10 +1,6 @@
-/* eslint-disable no-undef */
+import render from './render.js';
 
 const root = document.getElementById('root');
-
-const render = async (_root, state) => {
-  _root.innerHTML = JSON.stringify(state);
-};
 
 const updateStore = (state, action) => {
   let newState;

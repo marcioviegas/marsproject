@@ -1,5 +1,5 @@
 import extractRoversBasicInformation from '../src/server/adapters';
-import roversResponse from './rovers-response.json';
+import roversResponse from './mocks/rovers-response.json';
 
 test('extractRoversInformation', () => {
   expect(extractRoversBasicInformation(roversResponse.rovers)).toStrictEqual(
