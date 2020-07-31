@@ -1,11 +1,5 @@
-import render from '../src/public/render';
-
-document.body.innerHTML = "<main><div id='root'></div></main>";
-
-const root = document.getElementById('root');
+import app from '../src/public/app';
 
 test('extractRoversInformation', () => {
-  const a = { a: 'b' };
-  render(root, a);
-  expect(root.innerHTML).toBe(JSON.stringify(a));
+  expect(app('b')).toBe('b');
 });
