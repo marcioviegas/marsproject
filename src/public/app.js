@@ -1,6 +1,6 @@
-const buildMenuItem = (rover) => `<li id='${rover.name}'><a href='#'>${rover.name}</a></li>`;
+const buildMenuItem = (rover) => `<li><a href='#' id='${rover.name}'>${rover.name}</a></li>`;
 
-const wrapperMenu = (menuItemList) => `<ul>${menuItemList.join('')}</ul>`;
+const wrapperMenu = (menuItemList) => `<ul id='menu'>${menuItemList.join('')}</ul>`;
 
 const buildMenu = (state) => {
   const menuItems = state.rovers.reduce((menu, rover) => {

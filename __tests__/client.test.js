@@ -28,5 +28,5 @@ const state = {
 
 test('build app', () => {
   const appRendered = app(state);
-  expect(appRendered).toBe('<ul><li id=\'Curiosity\'><a href=\'#\'>Curiosity</a></li><li id=\'Spirit\'><a href=\'#\'>Spirit</a></li><li id=\'Opportunity\'><a href=\'#\'>Opportunity</a></li></ul>');
+  expect(appRendered).toBe('<ul id=\'menu\'><li><a href=\'#\' id=\'Curiosity\'>Curiosity</a></li><li><a href=\'#\' id=\'Spirit\'>Spirit</a></li><li><a href=\'#\' id=\'Opportunity\'>Opportunity</a></li></ul>');
 });

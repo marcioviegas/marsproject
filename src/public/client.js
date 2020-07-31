@@ -1,32 +1,25 @@
-/* eslint-disable no-undef */
+import store from './store.js';
 import app from './app.js';
+import getRovers from './api.js';
 
-const root = document.getElementById('root');
-
-const render = (_root, state) => {
-  /* eslint-disable no-param-reassign */
-  _root.innerHTML = app(state);
+const render = (state) => {
+  const root = document.getElementById('root');
+  root.innerHTML = app(state);
 };
 
-const updateStore = (state, action) => {
-  let newState;
+const updateStore = store(render);
 
-  switch (action.type) {
-    case ('UPDATE_ROVERS'):
-      newState = state.set('rovers', Immutable.List(action.data));
-      break;
-    default: break;
-  }
-
-  render(root, newState.toJS());
+const menuListener = (event) => {
+  const element = event.target;
+  updateStore({ action: 'ACTIVE_ROVER', data: element.id });
 };
-
-const getRovers = () => fetch('http://localhost:3000/rovers').then((res) => res.json());
 
 (() => {
   window.addEventListener('load', () => {
     getRovers().then((responseData) => {
-      updateStore(Immutable.Map(), { type: 'UPDATE_ROVERS', data: responseData.rovers });
+      updateStore({ type: 'UPDATE_ROVERS', data: responseData.rovers });
     });
   });
+
+  document.addEventListener('click', menuListener);
 })();
