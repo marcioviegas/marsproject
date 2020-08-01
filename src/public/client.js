@@ -1,19 +1,28 @@
 import store from './store.js';
 import app from './app.js';
-import getRovers from './api.js';
+import { getRovers, getPhotos } from './api.js';
 
 const render = (state) => {
-  const root = document.getElementById('root');
-  root.innerHTML = app(state);
+  const appRendered = app(state);
+
+  const menu = document.getElementById('menu-container');
+  menu.innerHTML = appRendered.menu;
+
+  const content = document.getElementById('content-container');
+  content.innerHTML = appRendered.content;
 };
 
 const updateStore = store(render, Immutable);
 
 const menuListener = (event) => {
   const element = event.target;
+  const roverName = element.id;
 
-  if (element.className === 'rover') {
-    updateStore({ type: 'ACTIVE_ROVER', data: element.id });
+  const isHoverChangeClick = element.className === 'rover';
+  if (isHoverChangeClick) {
+    getPhotos(roverName).then((res) => {
+      updateStore({ type: 'UPDATE_ROVER_PHOTOS', data: { rover: roverName, photos: res.photos } });
+    });
   }
 };
 

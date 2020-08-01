@@ -21,7 +21,20 @@ test('should add rovers on UPDATE and call callback', () => {
   expect(mockCallback).toHaveBeenCalledWith(newState);
 });
 
-test('should add rovers on UPDATE and call callback', () => {
-  const newState = updateStore({ type: 'ACTIVE_ROVER', data: 'Mars' });
+test('should update photos for a given rover and only for that rover', () => {
+  const rovers = [{ name: 'Mars' }, { name: 'Curiosity' }];
+  let newState = updateStore({ type: 'ADD_ROVERS', data: rovers });
+
+  const photos = [{ earth_data: '2020-1-10', img_src: 'image.src' }];
+  newState = updateStore({ type: 'UPDATE_ROVER_PHOTOS', data: { rover: 'Mars', photos } });
+
   expect(newState.active).toBe('Mars');
+  expect(newState.rovers[0]).toStrictEqual({
+    name: 'Mars',
+    photos: [{ earth_data: '2020-1-10', img_src: 'image.src' }],
+  });
+
+  expect(newState.rovers[1]).toStrictEqual({
+    name: 'Curiosity',
+  });
 });

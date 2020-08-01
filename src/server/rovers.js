@@ -11,6 +11,10 @@ const removeIdentifiers = (obj, ...identifiers) => identifiers.reduce(removeIden
 
 const sanatizeRover = (rover) => removeIdentifiers(rover, 'id', 'total_photos', 'max_sol', 'cameras');
 
+const sanatizePhoto = (photo) => removeIdentifiers(photo, 'id', 'sol', 'camera', 'rover');
+
 const extractRoversBasicInformation = (nasaApiRoversData) => nasaApiRoversData.map(sanatizeRover);
 
-export default extractRoversBasicInformation;
+const extractPhotosBasicInformation = (nasaApiPhotosData) => nasaApiPhotosData.map(sanatizePhoto);
+
+export { extractRoversBasicInformation, extractPhotosBasicInformation };

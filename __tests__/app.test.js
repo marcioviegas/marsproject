@@ -9,6 +9,9 @@ const state = {
       launch_date: '2011-11-26',
       max_date: '2020-07-28',
       status: 'active',
+      photos: [
+        { earth_data: '2020-1-20', img_src: 'https://img.src' },
+      ],
     },
     {
       name: 'Spirit',
@@ -28,24 +31,15 @@ const state = {
 };
 
 test('build menu with corresponding class', () => {
-  const appDOM = new JSDOM(app(state)).window.document;
+  const appDOM = new JSDOM(app(state).menu).window.document;
 
   const rovers = appDOM.querySelectorAll('.rover');
 
   expect(rovers).toHaveLength(3);
 });
 
-test('build default section when no rover is select', () => {
-  const appDOM = new JSDOM(app(state)).window.document;
-
-  const sections = appDOM.querySelectorAll('section');
-
-  expect(sections).toHaveLength(2);
-  expect(sections[1].innerHTML).toContain('Please select a Rover');
-});
-
 test('build rovers menu link', () => {
-  const appDOM = new JSDOM(app(state)).window.document;
+  const appDOM = new JSDOM(app(state).menu).window.document;
 
   const curiosity = appDOM.querySelector('#Curiosity');
 
@@ -63,18 +57,31 @@ test('build rovers menu link', () => {
   expect(oportunity.innerHTML).toBe('Opportunity');
 });
 
-test('build rover section', () => {
+test('build default section when no rover is select', () => {
+  const appDOM = new JSDOM(app(state).content).window.document;
+
+  const contentHTML = appDOM.documentElement.innerHTML;
+
+  expect(contentHTML).toContain('Please select a Rover');
+});
+
+test('build rover section with image', () => {
   const stateActived = {
     ...state,
     active: 'Curiosity',
   };
 
-  const appDOM = new JSDOM(app(stateActived)).window.document;
-  const roverSectionHTML = appDOM.querySelectorAll('section')[1].innerHTML;
+  const appDOM = new JSDOM(app(stateActived).content).window.document;
 
-  expect(roverSectionHTML).toContain('Name: Curiosity');
-  expect(roverSectionHTML).toContain('Landing Date: 2012-08-06');
-  expect(roverSectionHTML).toContain('Launch Date: 2011-11-26');
-  expect(roverSectionHTML).toContain('Status: active');
-  expect(roverSectionHTML).toContain('Max Date: 2020-07-28');
+  const contentHTML = appDOM.documentElement.innerHTML;
+
+  expect(contentHTML).toContain('Name: Curiosity');
+  expect(contentHTML).toContain('Landing Date: 2012-08-06');
+  expect(contentHTML).toContain('Launch Date: 2011-11-26');
+  expect(contentHTML).toContain('Status: active');
+  expect(contentHTML).toContain('Max Date: 2020-07-28');
+
+  const img = appDOM.querySelector('img');
+  expect(img).toBeDefined();
+  expect(img.src).toBe('https://img.src/');
 });
