@@ -12,6 +12,8 @@ const render = (state) => {
   content.innerHTML = appRendered.content;
 };
 
+// injecting Immutable to avoid tight dependency
+// eslint-disable-next-line no-undef
 const updateStore = store(render, Immutable);
 
 const menuListener = (event) => {
